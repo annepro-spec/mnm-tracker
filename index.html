@@ -3,314 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MNM Ecosystem Live Tracker</title>
+<title>MNM Architecture V2</title>
 <style>
-* {margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:#0a0a0f;
-  color:#e0e0e5;
-  font-family:'Segoe UI',system-ui,sans-serif;
-  min-height:100vh;
-  padding:20px;
-}
-h1{
-  text-align:center;
-  font-size:clamp(1.4rem,4vw,2.2rem);
-  background:linear-gradient(90deg,#00f0ff,#a855f7,#ff6b95);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin:20px auto 10px;
-  letter-spacing:-.5px;
-}
-.subtitle{text-align:center;color:#888;font-size:.9rem;margin-bottom:30px}
-.global-progress{
-  background:rgba(255,255,255,.05);
-  border-radius:16px;
-  padding:20px 24px;
-  max-width:700px;
-  margin:0 auto 30px;
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(12px);
-}
-.global-progress h2{font-size:1rem;color:#ccc;margin-bottom:12px}
-.progress-bar-bg{
-  background:rgba(255,255,255,.08);
-  border-radius:10px;
-  height:14px;
-  overflow:hidden;
-  position:relative;
-}
-.progress-bar-fill{
-  height:100%;
-  border-radius:10px;
-  background:linear-gradient(90deg,#00f0ff,#a855f7,#ff6b95);
-  transition:width .6s cubic-bezier(.25,.8,.25,1);
-  width:0%;
-}
-.progress-text{
-  text-align:center;
-  margin-top:8px;
-  font-size:.85rem;
-  color:#999;
-}
-.progress-text span{color:#00f0ff;font-weight:700}
-.dynamic-msg{
-  text-align:center;
-  color:#a855f7;
-  font-style:italic;
-  font-size:.85rem;
-  margin-top:6px;
-  min-height:1.2em;
-}
-.phase{
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:16px;
-  max-width:700px;
-  margin-left:auto;
-  margin-right:auto;
-  backdrop-filter:blur(8px);
-  transition:border-color .4s;
-}
-.phase:hover{border-color:rgba(168,168,255,.2)}
-.phase-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-  cursor:pointer;
-}
-.phase-header h3{
-  font-size:1.1rem;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.badge{
-  font-size:.7rem;
-  padding:3px 10px;
-  border-radius:99px;
-  font-weight:700;
-  letter-spacing:.5px;
-}
-.badge-todo{background:rgba(255,255,255,.08);color:#666}
-.badge-progress{background:rgba(0,240,255,.15);color:#00f0ff}
-.badge-done{background:rgba(0, 200, 100,.2);color:#00c864}
-.task-list{list-style:none}
-.task-item{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:10px 12px;
-  border-radius:10px;
-  transition:background .3s;
-  cursor:pointer;
-}
-.task-item:hover{background:rgba(255,255,255,.04)}
-.task-item input[type="checkbox"]{
-  -webkit-appearance:none;
-  appearance:none;
-  width:20px;height:20px;
-  border:2px solid rgba(255,255,255,.2);
-  border-radius:6px;
-  cursor:pointer;
-  position:relative;
-  flex-shrink:0;
-  transition:all .3s;
-}
-.task-item input[type="checkbox"]:checked{
-  background:linear-gradient(135deg,#00f0ff,#a855f7);
-  border-color:transparent;
-}
-.task-item input[type="checkbox"]:checked::after{
-  content:'✓';
-  position:absolute;
-  color:#fff;
-  font-size:12px;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-}
-.task-label{.done{text-decoration:line-through;color:#555}
-.phase-progress-mini{
-  height:4px;
-  background:rgba(255,255,255,.06);
-  border-radius:4px;
-  margin-top:12px;
-  overflow:hidden;
-}
-.phase-progress-mini-fill{
-  height:100%;
-  border-radius:4px;
-  transition:width .5s;
-}
-.c0{background:#00f0ff}
-.c1{background:#a855f7}
-.c2{background:#ff6b95}
-.c3{background:#00c864}
-.c4{background:#ffd700}
-.phase-desc{font-size:.8rem;color:#777;margin-bottom:8px;font-style:italic}
-@media(max-width:600px){
-  body{padding:12px}
-  .phase{padding:14px}
-  .phase-header h3{font-size:.95rem}
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A0F;color:#E8E8F0;font-family:-apple-system,system-ui,sans-serif;padding:16px;min-height:100vh}
+h1{font-size:1.3rem;font-weight:700;margin-bottom:4px;background:linear-gradient(135deg,#00D4FF,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:rgba(232,232,240,0.4);font-size:0.7rem;margin-bottom:16px}
+.tabs{display:flex;gap:5px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:7px 10px;border-radius:8px;font-size:0.68rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);transition:all 0.3s;text-align:center;flex:1;min-width:55px}
+.tab.active{border-color:rgba(0,212,255,0.5);background:rgba(0,212,255,0.08);color:#00D4FF}
+.v{display:none}.v.active{display:block}
+.bar{background:rgba(255,255,255,0.05);border-radius:8px;height:22px;margin-bottom:14px;overflow:hidden}
+.bf{height:100%;border-radius:8px;background:linear-gradient(90deg,#00D4FF,#8B5CF6);transition:width 0.5s;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:#0A0A0F}
+.s{width:100%;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);margin-bottom:8px}
+.sh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px;flex-wrap:wrap;gap:4px}
+.sn{font-size:0.55rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 6px;border-radius:4px}
+.sp{font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:14px}
+.st{font-size:0.82rem;font-weight:700;margin-bottom:3px}
+.sd{font-size:0.68rem;color:#95959A;line-height:1.35;margin-bottom:4px}
+.so{font-size:0.62rem;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05)}
+.so strong{color:#E8E8F0}
+.a{display:flex;flex-direction:column;align-items:center;padding:2px 0;color:rgba(139,92,246,0.3)}
+.al{width:2px;height:10px;background:linear-gradient(180deg,rgba(139,92,246,0.3),rgba(0,212,255,0.3))}
+.rot{width:100%;border:2px solid rgba(139,92,246,0.25);border-radius:14px;padding:12px;text-align:center;background:rgba(139,92,246,0.04);margin-bottom:8px}
+.rot h3{font-size:0.82rem;margin-bottom:4px;background:linear-gradient(90deg,#8B5CF6,#00D4FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.rot p{font-size:0.62rem;color:#95959A}
+.fk{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.fk .s{flex:1;min-width:130px;margin-bottom:0}
+.ci{padding:7px 9px;border-radius:7px;font-size:0.7rem;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);display:flex;align-items:center;gap:7px;cursor:pointer;margin-bottom:5px}
+.ci input{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:2px solid rgba(255,255,255,0.2);border-radius:4px;flex-shrink:0;cursor:pointer;position:relative}
+.ci input:checked{background:#10B981;border-color:#10B981}
+.ci input:checked::after{content:"¹3";position:absolute;top:-1px;left:2px;color:#0A0A0F;font-size:10px;font-weight:bold}
+.ci.done{opacity:0.3}.ci.done .cil{text-decoration:line-through}
+.ct{background:rgba(0,212,255,0.04);border-color:rgba(0,212,255,0.1)}
+.cb{background:rgba(239,68,68,0.04);border-color:rgba(239,68,68,0.1);color:#EF4444}
+.sm{background:rgba(255,255,255,0.03);border:1px solid rgba(0,212,255,0.1);border-radius:10px;padding:12px;margin-top:14px;font-size:0.68rem}
+.sm h3{color:#00D4FF;font-size:0.6rem;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+.sm p{color:#95959A;line-height:1.35}
+.key{color:#E8E8F0;font-weight:600}
+.ft{text-align:center;margin-top:16px;color:rgba(232,232,240,0.12);font-size:0.5rem}
+.sec-t{font-size:0.78rem;font-weight:700;margin-bottom:8px;margin-top:10px}
+@media(min-width:600px){body{padding:24px;max-width:620px;margin:0 auto}}
 </style>
 </head>
 <body>
-<h1>Mindful Neo-Managers — Ecosystem Tracker</h1>
-<p class="subtitle">Coche chaque tâche au fur et à mesure. Ton avancement est sauvegardé localement.</p>
-
-<div class="global-progress">
-  <h2>Progression globale</h2>
-  <div class="progress-bar-bg"><div class="progress-bar-fill" id="globalFill"></div></div>
-  <p class="progress-text"><span id="globalPct">0</span>% complété — <span id="globalDone">0</span>/<span id="globalTotal">0</span> tâches</p>
-  <p class="dynamic-msg" id="dynMsg"></p>
+<h1>MNM Architecture V2</h1>
+<p class="sub">Parcours clients + GHL tools + checklist interactive</p>
+<div class="bar"><div class="bf" id="bar">0%</div></div>
+<div class="tabs">
+<div class="tab active" onclick="sw(0)">Flux</div>
+<div class="tab" onclick="sw(1)">Profils</div>
+<div class="tab" onclick="sw(2)">GHL</div>
+<div class="tab" onclick="sw(3)">Checklist</div>
+<div class="tab" onclick="sw(4)">Revenue</div>
 </div>
 
-<div id="phases"></div>
+<div class="v active" id="v0">
+<div class="s" style="border-color:rgba(16,185,129,0.2)"><div class="sh"><span class="sn" style="background:rgba(16,185,129,0.12);color:#10B981">Entree</span><span class="sp" style="background:rgba(16,185,129,0.1);color:#10B981">GRATUIT</span></div><div class="st" style="color:#10B981">Lead Magnet</div><div class="sd">LinkedIn/podcast > opt-in > PDF par email</div></div>
+<div class="a"><div class="al"></div><div style="font-size:0.65rem">&#9660;</div></div>
+<div class="rot"><h3>Embranchement</h3><p>PDF seul (lead froid) OU Audit gratuit (lead chaud)</p></div>
+<div class="a"><div class="al"></div><div style="font-size:0.65rem">&#9660;</div></div>
+<div class="s" style="border-color:rgba(139,92,246,0.25)"><div class="sh"><span class="sn" style="background:rgba(139,92,246,0.1);color:#8B5CF6">Audit gratuit</span></div><div class="st" style="color:#8B5CF6">25 questions - Agent Studio</div><div class="sd">Score /105 > rapport IA personnalise > recommandation produit</div><div class="so"><strong>GHL:</strong> Agent Studio + Brand Voice + Knowledge Base</div></div>
+<div class="a"><div class="al"></div><div style="font-size:0.65rem">&#9660;</div></div>
+<div class="rot"><h3>Rotonde - 4 profils</h3><p>Chaque profil = parcours + offres + emails adaptes</p></div>
+<div class="a"><div class="al"></div><div style="font-size:0.65rem">&#9660;</div></div>
+<div class="fk">
+<div class="s" style="border-color:rgba(16,185,129,0.12)"><div class="sp" style="background:rgba(16,185,129,0.1);color:#10B981;font-size:0.5rem;display:inline-block;margin-bottom:2px">21-40</div><div class="st" style="font-size:0.7rem;color:#10B981">Stable</div><div class="sd">Newsletter</div></div>
+<div class="s" style="border-color:rgba(251,191,36,0.12)"><div class="sp" style="background:rgba(251,191,36,0.1);color:#FBBF24;font-size:0.5rem;display:inline-block;margin-bottom:2px">41-60</div><div class="st" style="font-size:0.7rem;color:#FBBF24">Stretched</div><div class="sd">Ebook $47</div></div>
+<div class="s" style="border-color:rgba(224,64,160,0.12)"><div class="sp" style="background:rgba(224,64,160,0.1);color:#E040A0;font-size:0.5rem;display:inline-block;margin-bottom:2px">61-80</div><div class="st" style="font-size:0.7rem;color:#E040A0">Overloaded</div><div class="sd">FBTB $197</div></div>
+<div class="s" style="border-color:rgba(239,68,68,0.12)"><div class="sp" style="background:rgba(239,68,68,0.1);color:#EF4444;font-size:0.5rem;display:inline-block;margin-bottom:2px">81-105</div><div class="st" style="font-size:0.7rem;color:#EF4444">Critical</div><div class="sd">$497-697</div></div>
+</div>
+<div class="s" style="border-color:rgba(251,191,36,0.12);text-align:center"><div class="st" style="font-size:0.75rem;color:#FBBF24">Cross-sell + Bundles</div><div class="sd">Duo $297 | Pack $697 | Ebooks $47-49</div></div>
+</div>
 
+<div class="v" id="v1">
+<div class="s" style="border-color:rgba(16,185,129,0.2)"><div class="sh"><span class="st" style="color:#10B981">Stable</span><span class="sp" style="background:rgba(16,185,129,0.1);color:#10B981">21-40 ~30%</span></div><div class="sd"><strong style="color:#E8E8F0">Msg:</strong> "Your system is holding."</div><div class="sd"><strong style="color:#E8E8F0">Parcours:</strong> Newsletter > ebook $47 a J+30</div><div class="so"><strong>Revenue:</strong> $0-47 | 30+ jours</div></div>
+<div class="s" style="border-color:rgba(251,191,36,0.2)"><div class="sh"><span class="st" style="color:#FBBF24">Stretched</span><span class="sp" style="background:rgba(251,191,36,0.1);color:#FBBF24">41-60 ~35%</span></div><div class="sd"><strong style="color:#E8E8F0">Msg:</strong> "Small shifts now prevent bigger cracks."</div><div class="sd"><strong style="color:#E8E8F0">Parcours:</strong> Ebook $47 > nurturing 14j > FBTB $197</div><div class="so"><strong>Revenue:</strong> $47-244 | 14-30 jours</div></div>
+<div class="s" style="border-color:rgba(224,64,160,0.2)"><div class="sh"><span class="st" style="color:#E040A0">Overloaded</span><span class="sp" style="background:rgba(224,64,160,0.1);color:#E040A0">61-80 ~25%</span></div><div class="sd"><strong style="color:#E8E8F0">Msg:</strong> "Your system needs redesigning."</div><div class="sd"><strong style="color:#E8E8F0">Parcours:</strong> FBTB $197 direct > cross-sell RLC $147</div><div class="so"><strong>Revenue:</strong> $197-540 | 7-21 jours</div></div>
+<div class="s" style="border-color:rgba(239,68,68,0.2)"><div class="sh"><span class="st" style="color:#EF4444">Critical</span><span class="sp" style="background:rgba(239,68,68,0.1);color:#EF4444">81-105 ~10%</span></div><div class="sd"><strong style="color:#E8E8F0">Msg:</strong> "Don't wait."</div><div class="sd"><strong style="color:#E8E8F0">Parcours:</strong> FBTB Premium $497 ou Pack $697</div><div class="so"><strong>Revenue:</strong> $497-697 | 3-10 jours</div></div>
+</div>
+
+<div class="v" id="v2">
+<div class="s" style="border-color:rgba(139,92,246,0.2)"><div class="sh"><span class="st" style="color:#8B5CF6">Agent Studio</span><span class="sn" style="background:rgba(139,92,246,0.12);color:#8B5CF6">AUDIT</span></div><div class="sd">Agent conversationnel 25 questions + scoring + rapport IA. Brand Voice + KB MNM.</div></div>
+<div class="s" style="border-color:rgba(0,212,255,0.2)"><div class="sh"><span class="st" style="color:#00D4FF">AI Studio</span><span class="sn" style="background:rgba(0,212,255,0.12);color:#00D4FF">PAGES</span></div><div class="sd">Pages par prompt: opt-in, confirmation, resultats audit, vente FBTB/RLC.</div></div>
+<div class="s" style="border-color:rgba(16,185,129,0.2)"><div class="sh"><span class="st" style="color:#10B981">Workflows</span><span class="sn" style="background:rgba(16,185,129,0.12);color:#10B981">AUTO</span></div><div class="sd">4 workflows par profil: tag > sequence email > offre > upsell.</div></div>
+<div class="s" style="border-color:rgba(224,64,160,0.2)"><div class="sh"><span class="st" style="color:#E040A0">Memberships</span><span class="sn" style="background:rgba(224,64,160,0.12);color:#E040A0">FORMATIONS</span></div><div class="sd">FBTB 5 modules + RLC 7 modules deployes. In-App Upsell.</div></div>
+<div class="s" style="border-color:rgba(251,191,36,0.2)"><div class="sh"><span class="st" style="color:#FBBF24">Content AI</span><span class="sn" style="background:rgba(251,191,36,0.12);color:#FBBF24">EMAILS</span></div><div class="sd">20-32 emails nurturing via Content AI + Brand Voice.</div></div>
+</div>
+
+<div class="v" id="v3">
+<div class="sec-t" style="color:#8B5CF6">1 - Agent Studio</div>
+<label class="ci ct"><input type="checkbox" data-t="agent-create"><span class="cil">Creer agent MNM Leadership Audit</span></label>
+<label class="ci ct"><input type="checkbox" data-t="agent-prompt"><span class="cil">System prompt (25 questions + scoring + rapport)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="agent-brand"><span class="cil">Connecter Brand Voice + Knowledge Base</span></label>
+<label class="ci ct"><input type="checkbox" data-t="agent-test"><span class="cil">Tester en staging (5 scenarios)</span></label>
+<div class="sec-t" style="color:#00D4FF">2 - Pages</div>
+<label class="ci ct"><input type="checkbox" data-t="page-optin"><span class="cil">Modifier page opt-in (4 champs + lien audit)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="page-confirm"><span class="cil">Page confirmation + embranchement</span></label>
+<label class="ci ct"><input type="checkbox" data-t="page-results"><span class="cil">Page resultats audit + CTA</span></label>
+<label class="ci ct"><input type="checkbox" data-t="page-fbtb"><span class="cil">Page vente FBTB ($197/$497)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="page-rlc"><span class="cil">Page vente RLC ($147/$397)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="page-ebooks"><span class="cil">Verifier 4 pages ebooks</span></label>
+<div class="sec-t" style="color:#10B981">3 - Offres GHL</div>
+<label class="ci ct"><input type="checkbox" data-t="offer-fbtb"><span class="cil">Config offre FBTB (Core/Premium + Stripe)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="offer-rlc"><span class="cil">Config offre RLC (Core/Premium + Stripe)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="offer-bundle"><span class="cil">Config bundles ($297/$697)</span></label>
+<label class="ci ct"><input type="checkbox" data-t="offer-upsell"><span class="cil">In-App Upsells FBTB/RLC</span></label>
+<div class="sec-t" style="color:#E040A0">4 - Workflows</div>
+<label class="ci ct"><input type="checkbox" data-t="wf-tags"><span class="cil">Creer tags GHL</span></label>
+<label class="ci ct"><input type="checkbox" data-t="wf-stable"><span class="cil">Workflow Stable</span></label>
+<label class="ci ct"><input type="checkbox" data-t="wf-stretched"><span class="cil">Workflow Stretched</span></label>
+<label class="ci ct"><input type="checkbox" data-t="wf-overloaded"><span class="cil">Workflow Overloaded</span></label>
+<label class="ci ct"><input type="checkbox" data-t="wf-critical"><span class="cil">Workflow Critical</span></label>
+<label class="ci ct"><input type="checkbox" data-t="wf-optiona"><span class="cil">Workflow Option A (PDF seul)</span></label>
+<div class="sec-t" style="color:#FBBF24">5 - Emails</div>
+<label class="ci cb"><input type="checkbox" data-t="em-stable"><span class="cil">Sequence Stable</span></label>
+<label class="ci cb"><input type="checkbox" data-t="em-stretched"><span class="cil">Sequence Stretched (5 emails)</span></label>
+<label class="ci cb"><input type="checkbox" data-t="em-overloaded"><span class="cil">Sequence Overloaded (5 emails)</span></label>
+<label class="ci cb"><input type="checkbox" data-t="em-critical"><span class="cil">Sequence Critical (3 emails)</span></label>
+<label class="ci cb"><input type="checkbox" data-t="em-optiona"><span class="cil">Sequence Option A (7 emails)</span></label>
+<div class="sec-t" style="color:#00D4FF">6 - Lancement</div>
+<label class="ci cb"><input type="checkbox" data-t="test-all"><span class="cil">Test parcours complet</span></label>
+<label class="ci cb"><input type="checkbox" data-t="linkedin"><span class="cil">Lancer LinkedIn organique</span></label>
+</div>
+
+<div class="v" id="v4">
+<div class="s" style="border-color:rgba(0,212,255,0.15);text-align:center"><div class="st" style="color:#00D4FF">100 leads/mois</div></div>
+<div class="s" style="border-color:rgba(16,185,129,0.12)"><div class="sh"><span style="color:#10B981;font-weight:700">Stable 30</span><span class="sp" style="background:rgba(16,185,129,0.1);color:#10B981">$450</span></div></div>
+<div class="s" style="border-color:rgba(251,191,36,0.12)"><div class="sh"><span style="color:#FBBF24;font-weight:700">Stretched 35</span><span class="sp" style="background:rgba(251,191,36,0.1);color:#FBBF24">$3,500</span></div></div>
+<div class="s" style="border-color:rgba(224,64,160,0.12)"><div class="sh"><span style="color:#E040A0;font-weight:700">Overloaded 25</span><span class="sp" style="background:rgba(224,64,160,0.1);color:#E040A0">$6,250</span></div></div>
+<div class="s" style="border-color:rgba(239,68,68,0.12)"><div class="sh"><span style="color:#EF4444;font-weight:700">Critical 10</span><span class="sp" style="background:rgba(239,68,68,0.1);color:#EF4444">$5,500</span></div></div>
+<div class="s" style="border-color:rgba(0,212,255,0.3);text-align:center"><div class="st" style="color:#00D4FF;font-size:1rem">~$15,700/mois</div><div class="sd">50 leads: ~$7,850 | 20 leads: ~$3,140</div></div>
+</div>
+
+<div class="ft">MNM Architecture V2 - ELYUN LLC</div>
 <script>
-const DATA=[
-{
-  name:"Phase 0 — Fondations",
-  icon:"🏗️",
-  color:"c0",
-  desc:{default:"Poser les bases solides de l'écosystème",half:"Les fondations prennent forme !",done:"Fondations verrouillées ✓"},
-  tasks:[
-    "Brand voice MNM définie et documentée",
-    "Positionnement marché validé (personas, concurrence)",
-    "Identité visuelle (couleurs, typo, logo concept)",
-    "ELYUN SOCIETY LLC — structure légale opérationnelle",
-    "Domaine + hebergement en place",
-    "GHL configuré (CRM, email, pipelines)",
-    "Stratégie de contenu initiale (piliers éditoriaux)"
-  ]
-},
-{
-  name:"Phase 1 — Content Engine",
-  icon:"✘️",
-  color:"c1",
-  desc:{default:"Construire la machine à contenu",half:"La machine tourne, continue !",done:"Content engine opérationnel 🚀"},
-  tasks:[
-    "Profil LinkedIn optimisé (banner, headline, about)",
-    "10 premiers posts LinkedIn ready-to-publish",
-    "Calendrier éditorial M1 (rotation des 6 piliers)",
-    "Lead magnet créé (scorecard ou mini-guide)",
-    "Welcome sequence email (3 emails minimum)",
-    "Premier article SEO publié",
-    "Système de batching installé (routine hebdo)"
-  ]
-},
-{
-  name:"Phase 2 — Lead Generation",
-  icon:"🧲️",
-  color:"c2",
-  desc:{default:"Attirer et capturer les bons leads",half:"Les leads commencent à arriver !",done:"Pipeline de leads actif 💪"},
-  tasks:[
-    "Landing page lead magnet live et testée",
-    "Funnel GHL complet (opt-in → sequence ‒ offre)",
-    "Pixel Meta + Google Ads installés",
-    "Première campagne Meta Ads test (budget mini)",
-    "Retargeting configuré",
-    "Scoring leads dans GHL (chaud / tiède / froid)"
-  ]
-},
-{
-  name:"Phase 3 — Product Launch",
-  icon:" 🚀",
-  color:"c3",
-  desc:{default:"Lancer le premier produit payant",half:"Le lancement est en cours !",done:"Premier produit lancé avec succès 🎉"},
-  tasks:[
-    "Ebook / formation finalisé et livrable",
-    "Page de vente long-form optimisée",
-    "Séquence de lancement (teasing, ouverture, urgence)",
-    "Système de paiement testé (Stripe / GHL)",
-    "Séquence post-achat (onboarding + témoignage)",
-    "Premières ventes analysées (CPA, taux conversion)"
-  ]
-},
-{
-  name:"Phase 4 — Scale & Automate",
-  icon:"⚡️",
-  color:"c4",
-  desc:{default:"Automatiser et scaler sans présence",half:"L'automatisation avance, la liberté approche !",done:"Écosystème autonome — mission accomplie 🏆"},
-  tasks:[
-    "Automations N8N core actives (lead triage, tagging)",
-    "Scaling ads — budget augmenté sur campagnes rentables",
-    "Deuxième produit en préparation ou lancé",
-    "Système de support client automatisé",
-    "Revenus récurrents > 2000€/mois",
-    "Dashboard KPI en place (revenu, leads, conversion)",
-    "Anne travaille < 4h/jour sur le business"
-  ]
-}
-];
-
-const SK='mnm_eco_v2';
-let state=JSON.parse(localStorage.getItem(SK)||'{}');
-
-const msgs=[
-  {min:0,max:5,msg:"Chaque grand voyage commence par un premier pas."},
-  {min:5,max:20,msg:"Les fondations se construisent. Continue."},
-  {min:20,max:40,msg:"La machine prend forme. Tu es sur le bon chemin."},
-  {min: 40,max:60,msg:"Mi-parcours ! La clarté s'installe."},
-  {min:60,max:80,msg:"La ligne d'arrivée se dessine. Fini vaut mieux que parfait."},
-  {min:80,max:99,msg:"Presque autonome. La liberté est là."},
-  {min:100,max:100,msg:"🌀 Écosystème complet. Tu as construit quelque chose de rare."}
-];
-
-function render(){
-  const c=document.getElementById('phases');
-  c.innerHTML='';
-  let total=0,done=0;
-  DATA.forEach((p,idx)=>{
-    const d=document.createElement('div');
-    d.className='phase';
-    let pd=0,pt=p.tasks.length;
-    total+=pt;
-    let tasksHtml=p.tasks.map((t,j)=>{
-      const k=`${idx}_${j}`;
-      const ch=state[k]===true;
-      if(ch){pd++;done++;}
-      return `<li class="task-item" onclick="toggle('${k}')">
-        <input type="checkbox" ${ch?'checked':''} tabindex="-1">
-        <span class="task-label ${ch?'done':''}">${t}</span>
-      </li>`;
-    }).join('');
-    const pct=pt?Math.round(pd/pt*100):0;
-    const bcls=pct===100?'badge-done':pct>0?'badge-progress':'badge-todo';
-    const desc=pct===100?p.desc.done:pct>=50?p.desc.half:p.desc.default;
-    d.innerHTML=`
-      <div class="phase-header">
-        <h3>${p.icon} ${p.name}</h3>
-        <span class="badge ${bcls}">${pct}%</span>
-      </div>
-      <p class="phase-desc">${desc}</p>
-      <ul class="task-list">${tasksHtml}</ul>
-      <div class="phase-progress-mini"><div class="phase-progress-mini-fill ${p.color}" style="width:${pct}%"></div></div>
-    `;
-    c.appendChild(d);
-  });
-  const gp=total?Math.round(done/total*100):0;
-  document.getElementById('globalFill').style.width=gp+'%';
-  document.getElementById('globalPct').textContent=gp;
-  document.getElementById('globalDone').textContent=done;
-  document.getElementById('globalTotal').textContent=total;
-  const m=msgs.find(x=>gp>=x.min&&gp<=x.max);
-  document.getElementById('dynMsg').textContent=m?m.msg:'';
-}
-
-function toggle(k){
-  state[k]=!state[k];
-  if(!state[k])delete state[k];
-  localStorage.setItem(SK,JSON.stringify(state));
-  render();
-}
-
-render();
+const K="mnm_v2i";
+function ld(){try{const s=localStorage.getItem(K);if(s)return JSON.parse(s)}catch(e){}return{}}
+function sv(){const s={};document.querySelectorAll(".ci input").forEach(c=>{s[c.dataset.t]=c.checked});try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}}
+function ap(){const s=ld();document.querySelectorAll(".ci input").forEach(c=>{if(s[c.dataset.t]!==undefined)c.checked=s[c.dataset.t];uv(c)})}
+function uv(c){const t=c.closest(".ci");c.checked?t.classList.add("done"):t.classList.remove("done")}
+function up(){const a=document.querySelectorAll(".ci input"),ch=document.querySelectorAll(".ci input:checked"),p=a.length?Math.round(ch.length/a.length*100):0;const b=document.getElementById("bar");b.style.width=p+"%";b.textContent=p+"% ("+ch.length+"/"+a.length+")"}
+document.querySelectorAll(".ci input").forEach(c=>{c.addEventListener("change",()=>{uv(c);sv();up()})});
+function sw(i){document.querySelectorAll(".tab").forEach((t,j)=>t.classList.toggle("active",j===i));document.querySelectorAll(".v").forEach((v,j)=>v.classList.toggle("active",j===i))}
+ap();up();
 </script>
 </body>
 </html>
